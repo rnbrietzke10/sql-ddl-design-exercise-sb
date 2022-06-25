@@ -9,27 +9,29 @@ CREATE TABLE medical_center (
     hospital_name VARCHAR(100) NOT NULL,
     address VARCHAR(100) NOT NULL,
     phone_number VARCHAR(11) NOT NULL
-
 );
 
-CREATE TABLE doctors (
+CREATE TABLE doctors
+(
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     phone_number VARCHAR(11) NOT NULL,
-    hosptial_id INTEGER REFERENCES med_center ON DELETE CASCADE
+    hosptial_id INTEGER REFERENCES medical_center
 );
 
-CREATE TABLE patients (
+CREATE TABLE patients
+(
     id SERIAL PRIMARY KEY,
     first_name VARCHAR(50) NOT NULL,
     last_name VARCHAR(50) NOT NULL,
     email VARCHAR(50) NOT NULL,
     address VARCHAR(100) NOT NULL,
-    phone_number VARCHAR(11) NOT NULL,
+    phone_number VARCHAR(11) NOT NULL
 );
 
-CREATE TABLE diagnosis (
+CREATE TABLE diagnosis
+(
     id SERIAL PRIMARY KEY,
     condition_name VARCHAR(100) NOT NULL,
     description TEXT NOT NULL,
@@ -38,9 +40,10 @@ CREATE TABLE diagnosis (
 );
 
 
-CREATE TABLE diagnosis_patient_doctor (
+CREATE TABLE diagnosis_patient_doctor
+(
     id SERIAL PRIMARY KEY,
-    patient_id INTEGER REFERENCES patients ON DELETE CASCADE,
-    doctor_id INTEGER REFERENCES doctors, -- Look at what to do on delete
+    patient_id INTEGER REFERENCES patients,
+    doctor_id INTEGER REFERENCES doctors,
     diagnosis_id INTEGER REFERENCES diagnosis
 );
